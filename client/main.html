@@ -1,0 +1,200 @@
+
+<head>
+  <title>Bery's official blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+
+</body>
+
+<template name="discussion">
+{{> categories}}
+{{> posts}}
+</template>
+
+
+<template name="blogContent">
+  
+
+<div class="container-fluid">
+  <div class="row content">
+
+
+  </div>
+  </div>
+
+</template>
+
+
+
+
+  <template name="categories">
+     <div class="col-sm-3 sidenav">
+      <h4>Bery's Blog</h4>
+       {{> addCategorie}}
+       {{> categorieList}}
+
+
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Home</a></li>
+        <li><a href="#section2">Tutorials</a></li>
+        <li><a href="#section3">Travelling</a></li>
+        <li><a href="#section3">Hobbies</a></li>
+      </ul><br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+  </template>
+
+  <template name="addCategorie">
+  <form>
+  <h4> Create Categories</h4>
+  <input type="text" placeholder="Enter categorie" name="categName">
+  </form>
+  </template>
+  <template name="categorieList">
+  <h4> Categories</h4>
+  <ul>
+    {{#each categories}}
+    <li> <a href="/categorie/{{_id}}">{{name}}</a></li>
+    {{/each}}
+
+  </ul>
+    
+  </template>
+
+  <template name="categoriePage">
+{{> categories}}
+    <h2>Categories: {{name}}</h2>
+    {{> posts}}
+</template>
+
+   
+
+    <template name="posts">
+     <div class="col-sm-9">
+     {{> discussPost}}
+      {{> addCommentForm}}
+      {{> commentList}}
+       </div>
+
+      </template> <!-- end of content template -->
+
+      <template name="discussPost">
+      {{#each posts}}
+      
+      <h4><small>RECENT POSTS</small></h4>
+      <hr>
+      <h2>{{title}}</h2>
+      <h5><span class="glyphicon glyphicon-time"></span> Post by {{createdBy}},{{createdOn}}</h5>
+     
+      <p>{{text}}</p>
+       <h5><span class="label label-danger"><span class="glyphicon glyphicon-heart"></span></span> <span class="label label-primary"><span class="glyphicon glyphicon-thumbs-up"> </span>
+       </span> <span class="label label-warning">share</span></h5><br>
+
+
+      <br><br>
+      {{/each}}
+      
+      </template>
+
+
+      <!-- add comment form -->
+       <template name="addCommentForm">
+      <h4>Leave a Comment:</h4>
+
+        <form role="form">
+        <div class="form-group">
+          <textarea class="form-control" name="commentContent" id="comment_input" rows="3" required>  
+          </textarea>
+        </div>
+        <button type="submit" class="btn btn-success js-add-comment">Submit</button>
+      </form>
+     
+      <br><br>
+      </template>
+      <!-- end of add comment form -->
+
+
+
+      <!-- comment content display -->
+      <template name="commentList">
+      <p><span class="badge">{{cmtCount}}</span> Comments:</p><br>
+      
+      {{#each comments}}
+      <div class="row">
+        <div class="col-sm-2 text-center">
+          <img src="avatar.jpg" class="img-circle" height="65" width="65" alt="profile">
+        </div>
+        <div class="col-sm-10">
+          <h4>{{createdBy}}<small>{{createdOn}}</small></h4>
+          <p> {{text}}</p>
+          <br>
+        </div>
+        
+      </div>
+
+      {{/each}}
+
+      </template>
+      <!-- end of comment content display -->
+
+    
+
+
+<template name="home">
+<div class="landing">
+<h2> Welcome to my site</h2>
+Login or create an account to view the content on this site
+<!--
+  <a href="{{pathFor route='login'}}">Login</a>
+or <a href="{{pathFor route='register'}}">Join</a>
+
+-->
+</div>
+</template>
+
+<template name="main">
+<div class="header">
+<div class="logo">
+    <h1>Habbert.com</h1>
+    </div>
+    <span  class="login">{{> loginButtons}} <a href="{{pathFor route='addPost'}}">Post</a></span>
+    </div>
+    <hr />
+    {{> yield}}
+
+    <hr />
+    <div class="footer" style="padding-top:200px;">
+    <p>Copyright &copy;Bertrand 2017-</p>
+    </div>
+</template>
+
+<!-- post ui -->
+<template name="addPost">
+<form role="form">
+        <div class="form-group">
+        <input type="text" name="postCateg" placeholder="enter categorie">
+        <input type="text" name="postTitle" placeholder="Enter post title">
+          <textarea class="form-control" name="postContent" id="post_input" rows="3" required>  
+          </textarea>
+        </div>
+        <button type="submit" class="btn btn-success js-add-post">Submit</button>
+      </form>
+</template>
+
+
+

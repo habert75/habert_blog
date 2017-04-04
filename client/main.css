@@ -1,0 +1,23 @@
+/* CSS declarations go here */
+body{
+
+	
+	padding:25px 50px 50px 75px;
+
+}
+
+.landing{
+	padding:25px 50px 50px 75px;
+	
+}
+
+.footer{
+	padding-left: 10px;
+}
+.login{
+	float:right;
+	padding-right: 200px;
+}
+.logo{
+	color: #0f2bfe;
+}
